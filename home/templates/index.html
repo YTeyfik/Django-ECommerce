@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1> Naberr</h1>
-{{ text }}
-</body>
-</html>
+{% extends "homebase.html" %}
+
+{% block title %}Index Page {% endblock %}
+{% block keywords %} Index Page Keywords{% endblock %}
+{% block description %} Index Page Description{% endblock %}
+
+{% block slider %} {% include "slider.html" %}{% endblock %}
+{% block content %}{% include "content.html" %} {% endblock %}
