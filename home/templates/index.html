@@ -1,8 +1,8 @@
 {% extends "homebase.html" %}
 
-{% block title %}Index Page {% endblock %}
-{% block keywords %} Index Page Keywords{% endblock %}
-{% block description %} Index Page Description{% endblock %}
+{% block title %}{{ setting.title }} {% endblock %}
+{% block keywords %} {{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }} {% endblock %}
 
 {% block slider %} {% include "slider.html" %}{% endblock %}
 {% block content %}{% include "content.html" %} {% endblock %}
