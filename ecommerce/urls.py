@@ -18,15 +18,16 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-
+from home import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Produce/',include('Produce.urls')),
     path('',include('home.urls')),
     path('home/',include('home.urls')),
-
-
+    path('ckeditor/',include('ckeditor_uploader.urls')),
+    path('about/',views.about,name='about'),
+    path('contact/',views.contact,name='contact'),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,33 @@
+{% extends "homebase.html" %}
+
+{% block title %}{{ setting.title }} {% endblock %}
+{% block keywords %} {{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }} {% endblock %}
+
+
+{% block content %}
+{% load static %}
+ <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb.jpg'%}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>About</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Home</a>
+                            <span>About</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="blog spad">
+        <div class="container">
+
+            {{ seting.aboutus|safe }}
+
+        </div>
+    </section>
+
+{% endblock %}

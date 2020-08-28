@@ -1,5 +1,10 @@
 {% load static %}
-<section class="hero">
+
+{% if page  %}
+    <section class="hero">
+{% else %}
+    <section class="hero hero-normal">
+{% endif %}
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -45,6 +50,7 @@
                             </div>
                         </div>
                     </div>
+                    {% if page  %}
                     <div class="hero__item set-bg" data-setbg="{% static 'img/hero/banner.jpg'%}">
                         <div class="hero__text">
                             <span>FRUIT FRESH</span>
@@ -53,6 +59,7 @@
                             <a href="#" class="primary-btn">SHOP NOW</a>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
