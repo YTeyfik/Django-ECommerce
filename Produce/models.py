@@ -39,6 +39,7 @@ class Produce(models.Model):
         image = models.ImageField(blank=True, upload_to='images/')
         cost=models.FloatField()
         Quantity=models.IntegerField()
+        slug=models.SlugField(blank=True, max_length=150)
         detail = RichTextUploadingField()
         status = models.CharField(max_length=10, choices=STATUS)
         created_at = models.DateTimeField(auto_now_add=True)

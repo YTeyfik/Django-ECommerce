@@ -3,13 +3,15 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from Produce.models import Category
+from Produce.models import Category, Produce
 from home.models import Setting, ContactFormu, ContactFormMessage
 
 
 def index(request):
     setting=Setting.objects.get(pk=1)
-    context={'setting':setting,'page':'home'}
+    sliderdata=Produce.objects.all()[:5]
+    context={'setting':setting,'page':'home',
+             'sliderdata':sliderdata}
     return render(request,'index.html',context)
 
 def about(request):
