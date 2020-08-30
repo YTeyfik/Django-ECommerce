@@ -10,9 +10,14 @@ from home.models import Setting, ContactFormu, ContactFormMessage
 def index(request):
     setting=Setting.objects.get(pk=1)
     sliderdata=Produce.objects.all()[:5]
+    dayproducts=Produce.objects.all()[:4]
+    lastproducts = Produce.objects.all().order_by('-id')[:4]
+    randomproducts = Produce.objects.all().order_by('?')[:4]
     category=Category.objects.all()
     context={'setting':setting,'page':'home',
-             'sliderdata':sliderdata,'category':category}
+             'sliderdata':sliderdata,'category':category
+             ,'dayproducts':dayproducts,'lastproducts':lastproducts
+             ,'randomproducts':randomproducts}
     return render(request,'index.html',context)
 
 def about(request):
