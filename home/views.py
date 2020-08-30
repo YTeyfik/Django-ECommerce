@@ -40,3 +40,12 @@ def contact(request):
     form=ContactFormu()
     context={'setting':setting,'form':form,'category': category}
     return render(request, 'contact.html', context)
+
+
+def category_produces(request,id,slug):
+    produces=Produce.objects.filter(category_id=id)
+    category = Category.objects.all()
+    categorydata = Category.objects.get(pk=id)
+    context={'produces':produces,'category':category
+             ,'categorydata':categorydata}
+    return render(request,'produces.html',context)
