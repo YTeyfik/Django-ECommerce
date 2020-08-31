@@ -6,8 +6,8 @@
 
 
 {% block content %}
-{% load static %}
- <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb.jpg'%}">
+    {% load static %}
+    <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb.jpg'%}">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -24,7 +24,7 @@
     </section>
 
 
-          <!-- Product Details Section Begin -->
+    <!-- Product Details Section Begin -->
     <section class="product-details spad">
         <div class="container">
             <div class="row">
@@ -32,14 +32,14 @@
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
                             <img class="product__details__pic__item--large"
-                                src="{{ produce.image.url}}" alt="">
+                                 src="{{ produce.image.url}}" alt="">
                         </div>
 
                         <div class="product__details__pic__slider owl-carousel">
-                           {% for rs in images %}
-                            <img data-imgbigurl="{{rs.image.url}}"
-                                src="{{ rs.image.url }}" alt="">
-                        {% endfor %}
+                            {% for rs in images %}
+                                <img data-imgbigurl="{{rs.image.url}}"
+                                     src="{{ rs.image.url }}" alt="">
+                            {% endfor %}
                         </div>
 
                     </div>
@@ -87,11 +87,11 @@
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
-                                    aria-selected="true">Description</a>
+                                   aria-selected="true">Description</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
-                                    aria-selected="false">Reviews <span>(1)</span></a>
+                                   aria-selected="false">Reviews</a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -103,11 +103,72 @@
                             </div>
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <div class="product__details__tab__desc">
-                                    <h6>Products Infomation</h6>
-                                    <p>{{ produce.cost }}</p>
+                                    <div class="row">
+                                        <div class="col-md-6" style="margin: auto">
+
+                                            {% for rs in comments %}
+                                                <div>
+                                                    <div>
+                                                        <div><a href="#"><i class="fa fa-user-md"></i>{{ rs.user.first_name }}</a></div>
+                                                        <div><a href="#"><i class="fa fa-clock-o"></i>{{ rs.create_at }}</a></div>
+                                                        <div >
+                                                            <i class="fa fa-star{% if rs.rate < 1 %}-o empty{% endif %}"></i>
+                                                            <i class="fa fa-star{% if rs.rate < 2 %}-o empty{% endif %}"></i>
+                                                            <i class="fa fa-star{% if rs.rate < 3 %}-o empty{% endif %}"></i>
+                                                            <i class="fa fa-star{% if rs.rate < 4 %}-o empty{% endif %}"></i>
+                                                            <i class="fa fa-star{% if rs.rate < 5 %}-o empty{% endif %}"></i>
+                                                        </div>
+
+                                                    </div>
+                                                    <div><b>{{ rs.subject }}</b>
+                                                        <p>{{ rs.comment }}</p>
+                                                    </div>
+                                                </div>
+
+
+                                            {% endfor %}
+                                        </div>
+                                        <div class="col-md-6" style="margin: auto">
+                                            <h4>Write Your Review</h4>
+                                            {% if messages %}
+                                                {% for message in messages %}
+                                                    <div class="alert alert-{{ message.tags }}" role="alert">
+                                                        {{ message }}
+                                                    </div>
+
+                                                {% endfor %}
+                                            {% endif %}
+                                            <form class="form-style-9" action="/Produce/addcomment/{{ produce.id }}" method="post">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <input class="input" type="text" name="subject" id="id_subject" placeholder="Subject">
+                                                </div>
+                                                <div class="form-group">
+                                                    <textarea class="input" name="comment" id="id_comment" placeholder="Your Review"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-rating">
+                                                        <strong class="text-uppercase">Your Rating</strong>
+                                                        <div class="stars">
+                                                            <input type="radio" id="star1" name="rate" value="1"/>1<label for="star1"></label>
+                                                            <input type="radio" id="star2" name="rate" value="2"/>2<label for="star2"></label>
+                                                            <input type="radio" id="star3" name="rate" value="3"/>3<label for="star3"></label>
+                                                            <input type="radio" id="star4" name="rate" value="4"/>4<label for="star4"></label>
+                                                            <input type="radio" id="star5" name="rate" value="5"/>5<label for="star5"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% if user.id is not None %}
+                                                    <button class="btn-info">Send Comment</button>
+                                                {% else %}
+                                                    Yorum Eklemek için login  olunuz!
+
+                                                {% endif %}
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

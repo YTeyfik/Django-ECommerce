@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from Produce.models import Category, Produce, Images
+from Produce.models import Category, Produce, Images, Comment
 from home.models import Setting, ContactFormu, ContactFormMessage
 
 
@@ -60,6 +60,7 @@ def produce_detail(request,id,slug):
     category=Category.objects.all()
     images=Images.objects.filter(produce_id=id)
     produce = Produce.objects.get(pk=id)
+    comments=Comment.objects.filter(produce_id=id,status='True')
     context={'category':category,'produce':produce
-             ,'images':images}
+             ,'images':images,'comments':comments,}
     return render(request,'produce_detail.html',context)
