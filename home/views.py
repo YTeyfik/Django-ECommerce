@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from Produce.models import Category, Produce, Images, Comment
+from home.forms import SearchForm
 from home.models import Setting, ContactFormu, ContactFormMessage
 
 
@@ -64,3 +65,18 @@ def produce_detail(request,id,slug):
     context={'category':category,'produce':produce
              ,'images':images,'comments':comments,}
     return render(request,'produce_detail.html',context)
+
+
+def produce_search(request):
+    if request.method=='POST':
+        form=SearchForm(request.POST)
+        if form.is_valid():
+            category=Category.objects.all()
+            query=form.cleaned_data['query'] #formdan bilgiyi al
+            produces=Produce.objects.filter(title__icontains=query) #select from like query
+            context={
+                'produces':produces,
+                'category':category,
+            }
+            return render(request,'produces_search.html',context)
+    return  HttpResponseRedirect('/')
