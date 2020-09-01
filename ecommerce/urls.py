@@ -31,6 +31,8 @@ urlpatterns = [
     path('category/<int:id>/<slug:slug>/',views.category_produces,name='category_produces'),
     path('produce/<int:id>/<slug:slug>/', views.produce_detail, name='produce_detail'),
     path('search/',views.produce_search,name='produce_search'),
+    path('logout/',views.logout_view,name='logout_view'),
+    path('login/',views.login_view,name='login_view'),
 ]
 
 if settings.DEBUG:
