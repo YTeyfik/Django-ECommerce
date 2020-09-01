@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from Produce.models import Category, Produce, Images, Comment
-from home.forms import SearchForm
+from home.forms import SearchForm, SignUpForm
 from home.models import Setting, ContactFormu, ContactFormMessage
 
 
@@ -105,3 +105,23 @@ def login_view(request):
         'category': category,
     }
     return render(request,'login.html',context)
+
+
+def signup_view(request):
+    if request.method=='POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username= form.cleaned_data.get('username')
+            password=form.cleaned_data.get('password1')
+            user=authenticate(username=username,password=password)
+            login(request,user)
+            return HttpResponseRedirect('/')
+
+    form=SignUpForm()
+    category = Category.objects.all()
+    context = {
+        'category': category,
+        'form':form,
+    }
+    return render(request,'signup.html',context)
