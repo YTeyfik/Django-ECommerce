@@ -1,1 +1,1 @@
-# Django-ECommerce
+# Django-ETicaret
