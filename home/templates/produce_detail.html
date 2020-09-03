@@ -58,15 +58,19 @@
                         <div class="product__details__price">${{ produce.cost }}</div>
                         <p>{{ produce.description }}</p>
                         <div class="product__details__quantity">
-                            <div >
+                            <form action="/order/addtocart/{{ produce.id }}">
+                                {% csrf_token %}
                                 <div >
+
                                     Adet:
                                     <input  type="number" min="0" max="{{ produce.Quantity }}" value="1">
+
+                                    <button type="submit" class="primary-btn">ADD TO CARD</button>
+
                                 </div>
-                            </div>
+
+                            </form>
                         </div>
-                        <a href="/addtocart/{{ produce.id }}" class="primary-btn">ADD TO CARD</a>
-                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <ul>
                             <li><b>Availability</b> <span>In Stock</span></li>
                             <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
