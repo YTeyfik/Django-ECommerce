@@ -1,1 +1,1 @@
-# Django-ETicaret
+# Django-Book sale
