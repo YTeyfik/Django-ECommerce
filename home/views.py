@@ -6,7 +6,7 @@ from django.shortcuts import render
 # Create your views here.
 from Produce.models import Category, Produce, Images, Comment
 from home.forms import SearchForm, SignUpForm
-from home.models import Setting, ContactFormu, ContactFormMessage
+from home.models import Setting, ContactFormu, ContactFormMessage, UserProfile
 from order.models import ShopCart
 
 
@@ -119,7 +119,14 @@ def signup_view(request):
             password=form.cleaned_data.get('password1')
             user=authenticate(username=username,password=password)
             login(request,user)
+
+            current_user = request.user
+            data = UserProfile()
+            data.user_id = current_user.id
+            data.image = "images/users/user.png"
+            data.save()
             return HttpResponseRedirect('/')
+
 
     form=SignUpForm()
     category = Category.objects.all()
