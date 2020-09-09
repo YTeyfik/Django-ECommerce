@@ -7,6 +7,7 @@ from django.shortcuts import render
 from Produce.models import Category, Produce, Images, Comment
 from home.forms import SearchForm, SignUpForm
 from home.models import Setting, ContactFormu, ContactFormMessage
+from order.models import ShopCart
 
 
 def index(request):
@@ -16,6 +17,8 @@ def index(request):
     lastproducts = Produce.objects.all().order_by('-id')[:4]
     randomproducts = Produce.objects.all().order_by('?')[:4]
     category=Category.objects.all()
+    current_user = request.user
+    request.session['cart_items'] = ShopCart.objects.filter(user_id=current_user.id).count()
     context={'setting':setting,'page':'home',
              'sliderdata':sliderdata,'category':category
              ,'dayproducts':dayproducts,'lastproducts':lastproducts

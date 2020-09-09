@@ -44,7 +44,7 @@
                                     <li ><a href="/logout/"><i class="fa fa-user"></i>logout </a> </li>
                                 </ul>
                             </li>
-                            <li><a href="/shopcart"><i class="fa fa-shopping-bag"></i></a></li>
+                            <li><a href="/shopcart"><i class="fa fa-shopping-bag">{{ request.session.cart_items }}</i></a></li>
                         {% else %}
                             <li> <a  href="/login/"><i class="fa fa-user">Login</i> </a></li>
                             <li><a  href="/signup/"><i class="fa fa-user">Sign up</i></a></li>
