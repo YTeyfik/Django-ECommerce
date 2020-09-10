@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from Produce.models import Category
 from home.models import UserProfile
+from order.models import Order, OrderProduce
 from user.forms import UserUpdateForm, ProfileUpdateForm
 
 
@@ -65,3 +66,27 @@ def change_password(request):
         return render(request,'change_password.html',{
             'form':form,'category':category
         })
+
+@login_required(login_url='/login')
+def orders(request):
+    category = Category.objects.all()
+    current_user = request.user
+    orders=Order.objects.filter(user_id=current_user.id)
+    context = {
+        'category': category,
+        'orders':orders
+    }
+    return render(request,"user_orders.html",context)
+
+@login_required(login_url='/login')
+def orderdetail(request,id):
+    category = Category.objects.all()
+    current_user = request.user
+    order = Order.objects.filter(user_id=current_user.id, id=id)
+    items=OrderProduce.objects.filter(order_id=id)
+    context = {
+        'category': category,
+        'order': order,
+        'items':items,
+    }
+    return render(request, "user_order_detail.html", context)

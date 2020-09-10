@@ -1,0 +1,73 @@
+{% extends "homebase.html" %}
+
+{% block title %}Profile{{ setting.title }} {% endblock %}
+{% block keywords %} {{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }} {% endblock %}
+
+
+{% block content %}
+    {% load static %}
+    <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb.jpg'%}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>User Orders</h2>
+                        <div class="breadcrumb__option">
+                            <a href="/">Home</a>
+                            <span>User Orders</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="contact" class="section wb">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="container">
+                        <div class="map-box">
+                            <h3 class="title">User Panel</h3>
+                            <hr>
+
+                        </div>
+                        {% include "user_panel.html" %}
+
+                    </div>
+                </div><!-- end col -->
+                <div class="col-md-9">
+                    <div class="map-box">
+                        <h3 class="title">User Orders</h3>
+
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <th class="text-left">Id</th>
+                            <th class="text-left">Produce Name</th>
+                            <th class="text-left">Cost</th>
+                            <th class="text-left">Quantity</th>
+                            <th class="text-left">Amount</th>
+                            <th class="text-left">Status</th>
+                            <th class="text-left">Date</th>
+                        </tr>
+                        {% for rs in items %}
+                            <tr>
+
+                                <td class="text-left"> <a href="/produce/{{ rs.produce_id }}/{{ rs.produce.slug }}"><img src="{{ rs.produce.image.url }}" height="80"></a></td>
+                                <td class="text-left">{{ rs.produce.title }}</td>
+                                <td class="text-left">{{ rs.cost }}</td>
+                                <td class="text-left">{{ rs.quantity }}</td>
+                                <td class="text-left">{{ rs.amount }}</td>
+                                <td class="text-left">{{ rs.status }}</td>
+                                <td class="text-left">{{ rs.create_at }}</td>
+
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div><!-- end row -->
+        </div>
+    </div>
+{% endblock %}
