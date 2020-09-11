@@ -1,0 +1,71 @@
+{% extends "homebase.html" %}
+
+{% block title %}Profile{{ setting.title }} {% endblock %}
+{% block keywords %} {{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }} {% endblock %}
+
+
+{% block content %}
+    {% load static %}
+    <section class="breadcrumb-section set-bg" data-setbg="{% static 'img/breadcrumb.jpg'%}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>User Comments</h2>
+                        <div class="breadcrumb__option">
+                            <a href="/">Home</a>
+                            <span>User Comments</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="contact" class="section wb">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="container">
+                        <div class="map-box">
+                            <h3 class="title">User Panel</h3>
+                            <hr>
+
+                        </div>
+                        {% include "user_panel.html" %}
+
+                    </div>
+                </div><!-- end col -->
+                <div class="col-md-9">
+                    <div class="map-box">
+                        <h3 class="title">User Comments</h3>
+
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <th class="text-left">Produce</th>
+                            <th class="text-left">Rate</th>
+                            <th class="text-left">Subject</th>
+                            <th class="text-left">Comment</th>
+                            <th class="text-left">Status</th>
+                            <th class="text-left">Date</th>
+                            <th class="text-left">Detail</th>
+                        </tr>
+                        {% for rs in comments %}
+                            <tr>
+                                <td class="text-left">{{rs.produce.title}}</td>
+                                <td class="text-left">{{ rs.rate }}</td>
+                                <td class="text-left">{{ rs.subject }}</td>
+                                <td class="text-left">{{ rs.comment }}</td>
+                                <td class="text-left">{{ rs.status }}</td>
+                                <td class="text-left">{{ rs.create_at }}</td>
+                                <td class="text-left"><a class="site-btn" href="/user/deletecomment/{{ rs.id }}">Delete</a></td>
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div><!-- end row -->
+        </div>
+    </div>
+{% endblock %}
